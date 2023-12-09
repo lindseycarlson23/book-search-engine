@@ -6,9 +6,10 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
+import { QUERY_ME } from '../utils/queries';
 
-import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
+import { REMOVE_BOOK } from '../utils/mutations';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
@@ -26,7 +27,11 @@ const SavedBooks = () => {
           return false;
         }
 
-        const response = await getMe(token);
+        // const response = await getMe(token);
+        const { loading, data } = useQuery(QUERY_ME, {
+          // pass URL parameter
+          variables: { token: token },
+        });
 
         if (!response.ok) {
           throw new Error('something went wrong!');
@@ -51,7 +56,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const response = await useMutation(REMOVE_BOOK);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
