@@ -36,6 +36,7 @@ const SignupForm = () => {
 
     try {
       if (!response.ok) {
+        console.log(response);
         throw Error("something went wrong!");
       }
 

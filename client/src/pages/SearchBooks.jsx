@@ -79,6 +79,9 @@ const SearchBooks = () => {
     }
 
     try {
+
+      //response is a function, a handling - pass what variables I want the mutation to use
+      //rename to addBookMutation
       const response = await useMutation(ADD_BOOK);
 
       if (!response.ok) {
